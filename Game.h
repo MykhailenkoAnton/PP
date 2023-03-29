@@ -1,8 +1,12 @@
+#include "GameElement/Field.h"
+
 enum class eAction
 {
     NONE,
     DOWN,
-    UP
+    UP,
+    RIGHT,
+    LEFT
 };
 
 class PingPongGame
@@ -13,4 +17,8 @@ public:
     void UserChoice();
 
     eAction getUserChoice();
+    void DrawField();
+
+private:
+    Field field;
 };

@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Windows.h>
 #include <conio.h>
 
@@ -28,6 +30,7 @@ class GameMenu
 {
 public:
     GameMenu();
+    ~GameMenu();
     void ShowMenu();
 
 private:

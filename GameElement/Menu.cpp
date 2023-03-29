@@ -8,6 +8,11 @@ GameMenu::GameMenu()
     menuItem.push_back({"EXIT", 7, false});
 }
 
+GameMenu::~GameMenu()
+{
+    system("cls");
+}
+
 void GameMenu::ShowMenu()
 {
     int counter = 0;
@@ -140,3 +145,5 @@ void GameMenu::SetActiveMenuItem(int counter)
         }
     }
 }
+
+

@@ -9,18 +9,23 @@ set(SOURCE_FILES
     Game.cpp
     GameElement/Menu.cpp
     GameElement/Field.cpp
+    GameElement/Player/Player.cpp
 )
 
 # Add headers files.
 set(HEADER_FILES
     Game.h
+    Utils.h
     GameElement/Menu.h
     GameElement/Field.h
+    GameElement/Player/Player.h
+
 )
 
 # Add subdirectory.
 set(DIRS
     GameElements
+    GameElement/Player/
 )
 
 # set (CMAKE_CXX_STANDARD_LIBRARIES "-lncurses")
