@@ -2,7 +2,7 @@
 #include "GameElement/Menu.h"
 
 // #include "GameElement/Field.h"
-
+#include "windows.h"
 #include <iostream>
 #include <thread>
 #include <iostream>
@@ -10,9 +10,9 @@
 
 void PingPongGame::run()
 {
-    // GameMenu * menu = new GameMenu();
-    // menu->ShowMenu();
-    // delete menu;
+    GameMenu * menu = new GameMenu();
+    menu->ShowMenu();
+    delete menu;
 
     std::thread input = std::thread(&PingPongGame::UserChoice, this);
     input.detach();
@@ -22,7 +22,7 @@ void PingPongGame::run()
 
     while(true)
     {
-        field.ShowPlayerOnField();
+        // field.ShowPlayerOnField();
     }
 }
 
@@ -85,5 +85,6 @@ void PingPongGame::DrawField()
     while (true)
     {
         field.ShowField();
+        field.ShowPlayerOnField();
     }
 }

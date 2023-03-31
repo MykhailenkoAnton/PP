@@ -33,8 +33,8 @@ void Field::FillField()
 
 void Field::ShowField()
 {
-    system("cls");
     ClearPlayerFromScreen();
+    system("cls");
     
     for (int row = 0; row < ROW; row++)
     {
@@ -44,8 +44,7 @@ void Field::ShowField()
         }
         std::cout << std::endl;
     }
-    // Sleep(50);
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    Sleep(25);
 }
 
 void Field::ShowPlayerOnField()
@@ -62,26 +61,38 @@ void Field::ShowPlayerOnField()
 
 void Field::MovePlayerUP()
 {
-    player.moveUP();
-    bIsMoved = true;
+    if(IsPossiblePlayerToMoveUP())
+    {
+        player.moveUP();
+        bIsMoved = true;
+    }
 }
 
 void Field::MovePlayerDOWN()
 {
-    player.moveDOWN();
-    bIsMoved = true;
+    if(IsPossiblePlayerToMoveDOWN())
+    {
+        player.moveDOWN();
+        bIsMoved = true;
+    }
 }
 
 void Field::MovePlayerRIGHT()
 {
-    player.moveRIGHT();
-    bIsMoved = true;
+    if(IsPossiblePlayerToMoveRIGHT())
+    {
+        player.moveRIGHT();   
+        bIsMoved = true;
+    }
 }
 
 void Field::MovePlayerLEFT()
 {
-    player.moveLEFT();
-    bIsMoved = true;
+    if(IsPossiblePlayerToMoveLEFT())
+    {
+        player.moveLEFT();
+        bIsMoved = true;
+    }
 }
 
 void Field::ClearPlayer()
@@ -105,4 +116,54 @@ void Field::ClearPlayerFromScreen()
         ClearPlayer();
         bIsMoved = false;
     }
+}
+
+bool Field::IsPossiblePlayerToMoveUP()
+{
+    const auto PlayerCoord = player.GetPlayerCoord();
+    if(PlayerCoord.row[0] - 1 == 0) 
+    {
+        return false;
+    }
+    
+    return true;
+}
+
+bool Field::IsPossiblePlayerToMoveDOWN()
+{
+    const auto PlayerCoord = player.GetPlayerCoord();
+    if(PlayerCoord.row[4] + 1 == 21) 
+    {
+        return false;
+    }
+    
+    return true;
+}
+
+bool Field::IsPossiblePlayerToMoveRIGHT()
+{
+    const auto PlayerCoord = player.GetPlayerCoord();
+    for (int i = 0; i < PLAYER_SIZE; i++)
+    {
+        if(PlayerCoord.column[i] + 1 == 99)
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+bool Field::IsPossiblePlayerToMoveLEFT()
+{
+    const auto PlayerCoord = player.GetPlayerCoord();
+    for (int i = 0; i < PLAYER_SIZE; i++)
+    {
+        if(PlayerCoord.column[i] - 1 == 0)
+        {
+            return false;
+        }
+    }
+    
+    return true;
 }

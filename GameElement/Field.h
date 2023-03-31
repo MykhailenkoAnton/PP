@@ -24,6 +24,11 @@ public:
 
 private:
     void ClearPlayer();
-    bool bIsMoved = false;
     void ClearPlayerFromScreen();
+
+    bool bIsMoved = false;
+    bool IsPossiblePlayerToMoveUP();
+    bool IsPossiblePlayerToMoveDOWN();
+    bool IsPossiblePlayerToMoveRIGHT();
+    bool IsPossiblePlayerToMoveLEFT();
 };
