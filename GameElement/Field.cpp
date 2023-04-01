@@ -1,9 +1,8 @@
 #include "Field.h"
-#include "../../Utils.h"
-#include "thread"
-#include "windows.h"
-#include <iostream>
 
+#include <thread>
+#include <windows.h>
+#include <iostream>
 
 Field::Field()
 {
@@ -16,15 +15,15 @@ Field::~Field()
 
 void Field::FillField()
 {
-    for (int i = 0; i < ROW; i++)
+    for (int i = 0; i < FieldE::ROW; i++)
     {
-        for (int j = 0; j < COLUMN; j++)
+        for (int j = 0; j < FieldE::COLUMN; j++)
         {
-            field[i][j] = ' ';
+            field[i][j] = FieldE::EMPTY;
 
-            if(i == 0 || i == ROW - 1 || j == 0 || j == COLUMN - 1)
+            if(i == 0 || i == FieldE::ROW - 1 || j == 0 || j == FieldE::COLUMN - 1)
             {
-                field[i][j] = 'X';
+                field[i][j] = FieldE::BOARDER;
             }
         }
     }
@@ -33,95 +32,78 @@ void Field::FillField()
 
 void Field::ShowField()
 {
-    ClearPlayerFromScreen();
     system("cls");
     
-    for (int row = 0; row < ROW; row++)
+    for (int row = 0; row < FieldE::ROW; row++)
     {
-        for (int columm = 0; columm < COLUMN; columm++)
+        for (int columm = 0; columm < FieldE::COLUMN; columm++)
         {
             std::cout << field[row][columm];
         }
         std::cout << std::endl;
     }
-    Sleep(25);
+    Sleep(50);
 }
 
 void Field::ShowPlayerOnField()
 {
-    ClearPlayerFromScreen();
+    ClearFieldElement(FieldE::PLAYER);
 
     const auto PlayerCoord = player.GetPlayerCoord();
-    for (int i = 0; i < PLAYER_SIZE; i++)
+    for (int i = 0; i < PlayerI::PLAYER_SIZE; i++)
     {
-        field[PlayerCoord.row[i]][PlayerCoord.column[i]] = 'P';
+        field[PlayerCoord.row[i]][PlayerCoord.column[i]] = FieldE::PLAYER;
     }
     
 }
 
-void Field::MovePlayerUP()
+void Field::ShowBallOnField()
 {
-    if(IsPossiblePlayerToMoveUP())
-    {
-        player.moveUP();
-        bIsMoved = true;
-    }
+    ClearFieldElement(FieldE::BALL);
+
+    const auto BallCoord = ball.GetBallCoord();
+    field[BallCoord.row][BallCoord.column] = FieldE::BALL;
 }
 
-void Field::MovePlayerDOWN()
+void Field::PlayerMove(eAction ActionMove)
 {
-    if(IsPossiblePlayerToMoveDOWN())
+    switch (ActionMove)
     {
-        player.moveDOWN();
-        bIsMoved = true;
-    }
-}
-
-void Field::MovePlayerRIGHT()
-{
-    if(IsPossiblePlayerToMoveRIGHT())
-    {
-        player.moveRIGHT();   
-        bIsMoved = true;
-    }
-}
-
-void Field::MovePlayerLEFT()
-{
-    if(IsPossiblePlayerToMoveLEFT())
-    {
-        player.moveLEFT();
-        bIsMoved = true;
-    }
-}
-
-void Field::ClearPlayer()
-{
-    for (int row = 0; row < ROW; row++)
-    {
-        for (int columm = 0; columm < COLUMN; columm++)
+    case eAction::UP:
+        if(IsPossiblePlayerToMoveUP())
         {
-            if(field[row][columm] == 'P')
-            {
-                field[row][columm] = ' ';
-            }
+            player.moveUP();
         }
-    }
-}
+        break;
+    case eAction::DOWN:
+        if(IsPossiblePlayerToMoveDOWN())
+        {
+            player.moveDOWN();
+        }
+        break;
+    case eAction::LEFT:
+        if(IsPossiblePlayerToMoveLEFT())
+        {
+            player.moveLEFT();
+        }
+        break;
+    case eAction::RIGHT:
+        if(IsPossiblePlayerToMoveRIGHT())
+        {
+            player.moveRIGHT();   
+        }
+        break;
 
-void Field::ClearPlayerFromScreen()
-{
-    if(bIsMoved)
-    {
-        ClearPlayer();
-        bIsMoved = false;
+    default:
+        break;
     }
+
 }
 
 bool Field::IsPossiblePlayerToMoveUP()
 {
     const auto PlayerCoord = player.GetPlayerCoord();
-    if(PlayerCoord.row[0] - 1 == 0) 
+    if(PlayerCoord.row[PlayerI::PLAYER_START_INDEX] - 1 == 0) 
     {
         return false;
     }
@@ -131,8 +113,9 @@ bool Field::IsPossiblePlayerToMoveUP()
 
 bool Field::IsPossiblePlayerToMoveDOWN()
 {
+    
     const auto PlayerCoord = player.GetPlayerCoord();
-    if(PlayerCoord.row[4] + 1 == 21) 
+    if(PlayerCoord.row[PlayerI::PLAYER_LAST_INDEX] + 1 == 21) 
     {
         return false;
     }
@@ -143,7 +126,7 @@ bool Field::IsPossiblePlayerToMoveDOWN()
 bool Field::IsPossiblePlayerToMoveRIGHT()
 {
     const auto PlayerCoord = player.GetPlayerCoord();
-    for (int i = 0; i < PLAYER_SIZE; i++)
+    for (int i = 0; i < PlayerI::PLAYER_SIZE; i++)
     {
         if(PlayerCoord.column[i] + 1 == 99)
         {
@@ -157,7 +140,7 @@ bool Field::IsPossiblePlayerToMoveRIGHT()
 bool Field::IsPossiblePlayerToMoveLEFT()
 {
     const auto PlayerCoord = player.GetPlayerCoord();
-    for (int i = 0; i < PLAYER_SIZE; i++)
+    for (int i = 0; i < PlayerI::PLAYER_SIZE; i++)
     {
         if(PlayerCoord.column[i] - 1 == 0)
         {
@@ -166,4 +149,18 @@ bool Field::IsPossiblePlayerToMoveLEFT()
     }
     
     return true;
+}
+
+void Field::ClearFieldElement(char body)
+{
+    for (int row = 0; row < FieldE::ROW; row++)
+    {
+        for (int columm = 0; columm < FieldE::COLUMN; columm++)
+        {
+            if(field[row][columm] == body)
+            {
+                field[row][columm] = FieldE::EMPTY;
+            }
+        }
+    }
 }

@@ -1,14 +1,5 @@
 #include "GameElement/Field.h"
 
-enum class eAction
-{
-    NONE,
-    DOWN,
-    UP,
-    RIGHT,
-    LEFT
-};
-
 class PingPongGame
 {
 

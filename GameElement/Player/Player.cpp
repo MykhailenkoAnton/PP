@@ -1,5 +1,8 @@
 #include "Player.h"
-#include "iostream"
+#include "../../Utils.h"
+
+#include <iostream>
+
 
 Player::Player()
 {
@@ -12,7 +15,7 @@ Player::Player()
 
 void Player::moveUP()
 {
-    for (int i = 0; i < PLAYER_SIZE; i++)
+    for (int i = 0; i < PlayerI::PLAYER_SIZE; i++)
     {
         playerCoord.row[i] -= 1;
     }
@@ -20,7 +23,7 @@ void Player::moveUP()
 
 void Player::moveDOWN()
 {
-    for (int i = 0; i < PLAYER_SIZE; i++)
+    for (int i = 0; i < PlayerI::PLAYER_SIZE; i++)
     {
         playerCoord.row[i] += 1;
     };
@@ -28,7 +31,7 @@ void Player::moveDOWN()
 
 void Player::moveRIGHT()
 {
-    for (int i = 0; i < PLAYER_SIZE; i++)
+    for (int i = 0; i < PlayerI::PLAYER_SIZE; i++)
     {
         playerCoord.column[i] += 1;
     }
@@ -37,7 +40,7 @@ void Player::moveRIGHT()
 
 void Player::moveLEFT()
 {
-    for (int i = 0; i < PLAYER_SIZE; i++)
+    for (int i = 0; i < PlayerI::PLAYER_SIZE; i++)
     {
         playerCoord.column[i] -= 1;
     }

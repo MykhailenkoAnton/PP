@@ -1,34 +1,28 @@
 #pragma once
 #include "Player.h"
+#include "PPBall.h"
 
-const int ROW = 22;
-const int COLUMN = 100;
 class Field
 {
-private:
-    char field[ROW][COLUMN];
-    void FillField();
-
-    Player player;
-
 public:
     Field();
     ~Field();
     void ShowField();
-
     void ShowPlayerOnField();
-    void MovePlayerUP();
-    void MovePlayerDOWN();
-    void MovePlayerRIGHT();
-    void MovePlayerLEFT();
+    void ShowBallOnField();
+    void PlayerMove(eAction ActionMove);
+    void ClearFieldElement(char body);
 
 private:
-    void ClearPlayer();
-    void ClearPlayerFromScreen();
 
-    bool bIsMoved = false;
     bool IsPossiblePlayerToMoveUP();
     bool IsPossiblePlayerToMoveDOWN();
     bool IsPossiblePlayerToMoveRIGHT();
     bool IsPossiblePlayerToMoveLEFT();
+
+    char field[FieldE::ROW][FieldE::COLUMN];
+    void FillField();
+
+    Player player;
+    PPBall ball;
 };

@@ -20,6 +20,6 @@ public:
     void moveRIGHT();
     void moveLEFT();
     
-private:
+protected:
     PlayerCoord playerCoord;
 };

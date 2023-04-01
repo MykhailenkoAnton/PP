@@ -9,7 +9,9 @@ set(SOURCE_FILES
     Game.cpp
     GameElement/Menu.cpp
     GameElement/Field.cpp
+    GameElement/PPBall.cpp
     GameElement/Player/Player.cpp
+    GameElement/Player/AI/PlayerAI.cpp
 )
 
 # Add headers files.
@@ -18,14 +20,16 @@ set(HEADER_FILES
     Utils.h
     GameElement/Menu.h
     GameElement/Field.h
+    GameElement/PPBall.h
     GameElement/Player/Player.h
-
+    GameElement/Player/AI/PlayerAI.h
 )
 
 # Add subdirectory.
 set(DIRS
     GameElements
     GameElement/Player/
+    GameElement/Player/AI/
 )
 
 # set (CMAKE_CXX_STANDARD_LIBRARIES "-lncurses")

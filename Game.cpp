@@ -1,8 +1,8 @@
 #include "Game.h"
 #include "GameElement/Menu.h"
+#include "Utils.h"
 
-// #include "GameElement/Field.h"
-#include "windows.h"
+#include <windows.h>
 #include <iostream>
 #include <thread>
 #include <iostream>
@@ -22,7 +22,7 @@ void PingPongGame::run()
 
     while(true)
     {
-        // field.ShowPlayerOnField();
+        
     }
 }
 
@@ -35,16 +35,16 @@ void PingPongGame::UserChoice()
         switch (Input)
         {
         case eAction::UP:
-            field.MovePlayerUP();
+            field.PlayerMove(eAction::UP);
             break;
         case eAction::DOWN:
-            field.MovePlayerDOWN();
+            field.PlayerMove(eAction::DOWN);
             break;
         case eAction::LEFT:
-            field.MovePlayerLEFT();
+            field.PlayerMove(eAction::LEFT);
             break;
         case eAction::RIGHT:
-            field.MovePlayerRIGHT();
+            field.PlayerMove(eAction::RIGHT);
             break;
 
         default:
@@ -86,5 +86,6 @@ void PingPongGame::DrawField()
     {
         field.ShowField();
         field.ShowPlayerOnField();
+        field.ShowBallOnField();
     }
 }
