@@ -25,7 +25,12 @@ namespace FieldE
     const char EMPTY = ' ';
 
     const int ROW = 22;
-    const int COLUMN = 100; 
+    const int COLUMN = 100;
+
+    const int START_FIELD_ROW = 0;
+    const int START_FIELD_COLUMN = 0;
+    const int END_FIELD_ROW = 21;
+    const int END_FIELD_COLUMN = 99;
 }
 
 #endif

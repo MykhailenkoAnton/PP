@@ -103,7 +103,7 @@ void Field::PlayerMove(eAction ActionMove)
 bool Field::IsPossiblePlayerToMoveUP()
 {
     const auto PlayerCoord = player.GetPlayerCoord();
-    if(PlayerCoord.row[PlayerI::PLAYER_START_INDEX] - 1 == 0) 
+    if(PlayerCoord.row[PlayerI::PLAYER_START_INDEX] - 1 == FieldE::START_FIELD_ROW) 
     {
         return false;
     }
@@ -113,9 +113,8 @@ bool Field::IsPossiblePlayerToMoveUP()
 
 bool Field::IsPossiblePlayerToMoveDOWN()
 {
-    
     const auto PlayerCoord = player.GetPlayerCoord();
-    if(PlayerCoord.row[PlayerI::PLAYER_LAST_INDEX] + 1 == 21) 
+    if(PlayerCoord.row[PlayerI::PLAYER_LAST_INDEX] + 1 == FieldE::END_FIELD_ROW) 
     {
         return false;
     }
@@ -128,7 +127,7 @@ bool Field::IsPossiblePlayerToMoveRIGHT()
     const auto PlayerCoord = player.GetPlayerCoord();
     for (int i = 0; i < PlayerI::PLAYER_SIZE; i++)
     {
-        if(PlayerCoord.column[i] + 1 == 99)
+        if(PlayerCoord.column[i] + 1 == FieldE::END_FIELD_COLUMN)
         {
             return false;
         }
@@ -142,7 +141,7 @@ bool Field::IsPossiblePlayerToMoveLEFT()
     const auto PlayerCoord = player.GetPlayerCoord();
     for (int i = 0; i < PlayerI::PLAYER_SIZE; i++)
     {
-        if(PlayerCoord.column[i] - 1 == 0)
+        if(PlayerCoord.column[i] - 1 == FieldE::START_FIELD_COLUMN)
         {
             return false;
         }
