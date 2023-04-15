@@ -1,6 +1,11 @@
 #include "Menu.h"
 #include "iostream"
 
+namespace
+{
+    const std::string authorName = "MYKHAILENKO ANTON C++ GAME DEVEPOPER";
+}
+
 GameMenu::GameMenu()
 {
     menuItem.push_back({"START GAME", 12, false});

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYERAI_H_
+#define PLAYERAI_H_
 
 #include "../Player.h"
 
@@ -9,3 +10,5 @@ private:
 public:
     PlayerAI();
 };
+
+#endif //PLAYERAI_H_

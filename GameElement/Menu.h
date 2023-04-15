@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MENU_H_
+#define MENU_H_
 
 #include <Windows.h>
 #include <conio.h>
@@ -47,5 +48,6 @@ private:
 private:
     std::vector<MenuItem> menuItem;
     char key;
-    const std::string authorName = "MYKHAILENKO ANTON C++ GAME DEVEPOPER";
 };
+
+#endif //MENU_H_

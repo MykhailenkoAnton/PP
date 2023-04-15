@@ -8,6 +8,7 @@
 #include <iostream>
 #include <conio.h>
 
+
 void PingPongGame::run()
 {
     GameMenu * menu = new GameMenu();
@@ -20,9 +21,11 @@ void PingPongGame::run()
     std::thread fieldDraw = std::thread(&PingPongGame::DrawField, this);
     fieldDraw.detach();
 
-    while(true)
+    while(!bExitGame)
     {
-        
+        field.MoveBall();
+        field.MoveAI();
+        Sleep(25);
     }
 }
 
@@ -31,7 +34,6 @@ void PingPongGame::UserChoice()
     while(true)
     {
         const auto Input = getUserChoice();
-
         switch (Input)
         {
         case eAction::UP:
@@ -40,13 +42,8 @@ void PingPongGame::UserChoice()
         case eAction::DOWN:
             field.PlayerMove(eAction::DOWN);
             break;
-        case eAction::LEFT:
-            field.PlayerMove(eAction::LEFT);
+        case eAction::NONE:
             break;
-        case eAction::RIGHT:
-            field.PlayerMove(eAction::RIGHT);
-            break;
-
         default:
             break;
         }
@@ -64,19 +61,14 @@ eAction PingPongGame::getUserChoice()
     case 'w':
         return eAction::UP;
         break;
-    case 'a':
-        return eAction::LEFT;
-        break;
-    case 'd':
-        return eAction::RIGHT;
-        break;
-
     case 'q':
-        exit(0);
+        bExitGame = true;
         break;
     default:
+        return eAction::NONE;
         break;
     }
+    
     return eAction::NONE;
 }
 
@@ -86,6 +78,7 @@ void PingPongGame::DrawField()
     {
         field.ShowField();
         field.ShowPlayerOnField();
+        field.ShowAIPlayerOnField();
         field.ShowBallOnField();
     }
 }

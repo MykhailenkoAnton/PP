@@ -12,6 +12,7 @@ set(SOURCE_FILES
     GameElement/PPBall.cpp
     GameElement/Player/Player.cpp
     GameElement/Player/AI/PlayerAI.cpp
+    GameElement/Timer.cpp
 )
 
 # Add headers files.
@@ -23,6 +24,7 @@ set(HEADER_FILES
     GameElement/PPBall.h
     GameElement/Player/Player.h
     GameElement/Player/AI/PlayerAI.h
+    GameElement/Timer.h
 )
 
 # Add subdirectory.

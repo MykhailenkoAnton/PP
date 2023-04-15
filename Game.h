@@ -1,3 +1,6 @@
+#ifndef GAME_H_
+#define GAME_H_
+
 #include "GameElement/Field.h"
 
 class PingPongGame
@@ -12,4 +15,8 @@ public:
 
 private:
     Field field;
+    bool bExitGame = false;
+
 };
+
+#endif //GAME_H_
